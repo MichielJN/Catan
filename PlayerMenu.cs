@@ -69,10 +69,10 @@ namespace Catan
                 new Player(player4textbox.Text, "Black")};
 
                 Program.game = new Game(players);
-
+                Program.game.LoadGame();
                 GameInterface gameInterface = new GameInterface();
                 gameInterface.Visible = true;
-                Program.game.LoadGame();
+                
                 foreach (Settlement settlement in Program.game.Settlements)
                 {
                     settlement.UpdateSettlement(settlement);

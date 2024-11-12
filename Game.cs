@@ -16,7 +16,7 @@ namespace Catan
         public Tile[] Tiles { get; set; } = new Tile[19];
         public Development developments { get; set; }
         public bool GameBegin { get; set; } = true;
-        public Dice Dice { get; set; } = new Dice();
+        public Die Dice { get; set; } = new Die();
         public Button[] SettlementButtons { get; set; }
         public Button[] StreetButons { get; set; }
         public InterfaceButtons InterfaceButtons { get; set; } = new InterfaceButtons();
@@ -28,10 +28,10 @@ namespace Catan
         {
             //LoadGame();
             this.Players = players;
-            foreach(Player player in Players)
-            {
-                Program.Dal.SavePlayer(player);
-            }
+            //foreach(Player player in Players)
+            //{
+            //    Program.Dal.SavePlayer(player);
+            //}
             
            
         }

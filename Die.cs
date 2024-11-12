@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Catan
 {
-    public class Dice
+    public class Die
     {
         public List<int> DiceHistory { get; set; } = new List<int>();
 
-        public int ThrowDice()
+        public int ThrowDie()
         {
             List<int> diceNumbers = new List<int> { 1, 2, 3, 4, 5, 6 };
 
@@ -32,7 +32,7 @@ namespace Catan
             {
                 tile.UpdateConnectingVillages(tile);                
             }
-            return (Program.game.Dice.ThrowDice() + Program.game.Dice.ThrowDice());
+            return (Program.game.Dice.ThrowDie() + Program.game.Dice.ThrowDie());
         }
 
         public string CheckRescourcesDiceValue(int diceValue)

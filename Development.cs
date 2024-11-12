@@ -9,7 +9,7 @@ namespace Catan
     public class Development
     {
         public int VictoryPoint { get; set; } = 0;
-        public int StreetsLeft { get; set; } = 0;
+        public int RoadBuilding { get; set; } = 0;
         public int Monopoly { get; set; } = 0;
         public int YearOfPlenty { get; set; } = 0;
         public int Knight { get; set; } = 0;

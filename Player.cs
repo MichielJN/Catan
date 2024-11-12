@@ -12,7 +12,6 @@ namespace Catan
         public int Points { get; set; } = 0;
         public string UserName { get; set; } = "-";
         public Development Developments { get; set; } = new Development();
-        public List<Settlement> Settlements { get; set;} = new List<Settlement>();
         public Rescources Rescources { get; set; } = new Rescources();
 
         public int NumberOfStreets { get; set; } = 15;
