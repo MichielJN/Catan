@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Catan
+namespace Catan.Models
 {
     public class Tile
     {
@@ -16,9 +16,9 @@ namespace Catan
 
         public Tile(int tileNumber, string rescource, int number, string connectedSettlements)
         {
-            this.TileName = "T" + tileNumber;
-            this.Rescource = rescource;
-            this.Number = number;
+            TileName = "T" + tileNumber;
+            Rescource = rescource;
+            Number = number;
             string[] connectedVillages = connectedSettlements.Split(",");
             Settlement[] villagesConnected = new Settlement[6];
             AssignConnectingSettlements(connectedVillages);
@@ -26,22 +26,22 @@ namespace Catan
 
         public Tile(string tileName)
         {
-            this.TileName = tileName;
+            TileName = tileName;
         }
 
         public Tile(int tileNumber, string rescource, int number)
         {
-            this.TileName = "T" + tileNumber;
-            this.Rescource = rescource;
-            this.Number = number;
+            TileName = "T" + tileNumber;
+            Rescource = rescource;
+            Number = number;
         }
 
         public Tile(int tileNumber, string rescource, int number, bool robber)
         {
-            this.TileName = "T" + tileNumber;
-            this.Rescource = rescource;
-            this.Number = number;
-            this.Robber = robber;
+            TileName = "T" + tileNumber;
+            Rescource = rescource;
+            Number = number;
+            Robber = robber;
         }
 
         public Tile()
@@ -71,11 +71,11 @@ namespace Catan
         {
             for (int i = 0; i < 6; i++)
             {
-                this.ConnectedSettlements[i] = Program.game.Settlements[Program.game.GetSettlementIndex(connectedVillages[i])];
+                ConnectedSettlements[i] = Program.game.Settlements[Program.game.GetSettlementIndex(connectedVillages[i])];
             }
         }
     }
 }
 
-    
+
 

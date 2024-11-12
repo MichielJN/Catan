@@ -1,4 +1,5 @@
 ﻿using Catan.Enums;
+using Catan.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -1,9 +1,11 @@
 using System.Linq;
+using Catan.Data;
+using Catan.Models;
 
 
 namespace Catan
 {
-    
+
     internal static class Program
     {
         

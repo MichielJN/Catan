@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Catan
+namespace Catan.Models
 {
     public class Die
     {
@@ -22,7 +22,7 @@ namespace Catan
                 diceNumbers.RemoveAt(index);
                 diceNumbers.Insert(random.Next(0, 6), diceNumber);
             }
-            this.DiceHistory.Add(diceNumbers[0]);
+            DiceHistory.Add(diceNumbers[0]);
             return diceNumbers[0];
         }
 
@@ -30,16 +30,16 @@ namespace Catan
         {
             foreach (Tile tile in Program.game.Tiles)
             {
-                tile.UpdateConnectingVillages(tile);                
+                tile.UpdateConnectingVillages(tile);
             }
-            return (Program.game.Dice.ThrowDie() + Program.game.Dice.ThrowDie());
+            return Program.game.Dice.ThrowDie() + Program.game.Dice.ThrowDie();
         }
 
         public string CheckRescourcesDiceValue(int diceValue)
         {
-            foreach(Tile tile in Program.game.Tiles)
+            foreach (Tile tile in Program.game.Tiles)
             {
-                if(tile.Number == diceValue)
+                if (tile.Number == diceValue)
                 {
                     if (tile.Robber == false)
                     {
@@ -129,22 +129,22 @@ namespace Catan
                         player.Rescources.Wood += amountOfPoints;
                     }
 
-                    else if(rescource == "Steen")
+                    else if (rescource == "Steen")
                     {
                         player.Rescources.Stone += amountOfPoints;
                     }
 
-                    else if(rescource == "Graan")
+                    else if (rescource == "Graan")
                     {
                         player.Rescources.Grain += amountOfPoints;
                     }
 
-                    else if(rescource == "Schaap")
+                    else if (rescource == "Schaap")
                     {
                         player.Rescources.Sheep += amountOfPoints;
                     }
 
-                    else if(rescource == "Erts")
+                    else if (rescource == "Erts")
                     {
                         player.Rescources.Ore += amountOfPoints;
                     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Catan
+namespace Catan.Models
 {
     public class Rescources
     {
@@ -16,13 +16,13 @@ namespace Catan
 
         public bool BuyStreet()
         {
-            if(this.Stone > 0 & this.Wood > 0)
+            if (Stone > 0 & Wood > 0)
             {
 
                 if (AskAffirmation("straat") == true)
                 {
-                    this.Stone -= 1;
-                    this.Wood -= 1;
+                    Stone -= 1;
+                    Wood -= 1;
 
                     return true;
                 }
@@ -33,18 +33,18 @@ namespace Catan
 
         public bool BuySettlement()
         {
-            if (this.Stone > 0 & this.Wood > 0)
+            if (Stone > 0 & Wood > 0)
             {
 
-                if(this.Grain > 0 & this.Sheep > 0)
+                if (Grain > 0 & Sheep > 0)
                 {
                     if (AskAffirmation("dorp") == true)
                     {
 
-                        this.Stone -= 1;
-                        this.Wood -= 1;
-                        this.Grain -= 1;
-                        this.Sheep -= 1;
+                        Stone -= 1;
+                        Wood -= 1;
+                        Grain -= 1;
+                        Sheep -= 1;
 
                         return true;
                     }
@@ -57,14 +57,14 @@ namespace Catan
 
         public bool BuyCity()
         {
-            if(this.Ore > 2 & this.Grain > 1)
+            if (Ore > 2 & Grain > 1)
             {
                 if (AskAffirmation("stad") == true)
                 {
 
 
-                    this.Ore -= 3;
-                    this.Grain -= 2;
+                    Ore -= 3;
+                    Grain -= 2;
                     return true;
                 }
                 return false;
@@ -74,15 +74,15 @@ namespace Catan
 
         public bool BuyDevelopment()
         {
-            if(this.Ore > 0 & this.Sheep > 0)
+            if (Ore > 0 & Sheep > 0)
             {
-                if(this.Grain > 0)
+                if (Grain > 0)
                 {
                     if (AskAffirmation("ontwikkeling") == true)
                     {
-                        this.Ore -= 1;
-                        this.Sheep -= 1;
-                        this.Grain -= 1;
+                        Ore -= 1;
+                        Sheep -= 1;
+                        Grain -= 1;
 
                         return true;
                     }
@@ -96,8 +96,8 @@ namespace Catan
         public bool AskAffirmation(string itemBaught)
         {
 
-            DialogResult dialogResult = MessageBox.Show("Wil je een " + itemBaught + " kopen?","", MessageBoxButtons.YesNo);
-            if(dialogResult == DialogResult.Yes)
+            DialogResult dialogResult = MessageBox.Show("Wil je een " + itemBaught + " kopen?", "", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
                 return true;
             }
@@ -109,26 +109,26 @@ namespace Catan
 
         public void GetStartGameRescources(Settlement settlement)
         {
-            foreach(Tile tile in settlement.TilesConnectedToThisSettlement)
+            foreach (Tile tile in settlement.TilesConnectedToThisSettlement)
             {
                 switch (Program.game.Tiles[Program.game.GetTileIndex(tile)].Rescource) //tile.Rescource)
                 {
                     case "Graan":
-                        this.Grain += 1;
+                        Grain += 1;
                         continue;
                     case "Steen":
-                        this.Stone += 1;
+                        Stone += 1;
                         continue;
                     case "Hout":
-                        this.Wood += 1;
+                        Wood += 1;
                         continue;
                     case "Schaap":
-                        this.Sheep += 1;
+                        Sheep += 1;
                         continue;
                     case "Erts":
-                        this.Ore += 1;
+                        Ore += 1;
                         continue;
-                        
+
 
                 }
             }
@@ -138,8 +138,8 @@ namespace Catan
             Tile robbedTile = new Tile();
             foreach (Tile tile in Program.game.Tiles)
             {
-                
-                if(tile.Robber == true)
+
+                if (tile.Robber == true)
                 {
                     robbedTile = tile;
                     break;
@@ -147,9 +147,9 @@ namespace Catan
 
             }
             List<string> robbedPlayers = new List<string>();
-            foreach(Settlement settlement in robbedTile.ConnectedSettlements)
+            foreach (Settlement settlement in robbedTile.ConnectedSettlements)
             {
-                if(settlement.Owner.UserName != "-")
+                if (settlement.Owner.UserName != "-")
                 {
                     robbedPlayers.Add(settlement.Owner.UserName);
                 }

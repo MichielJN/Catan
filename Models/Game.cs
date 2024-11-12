@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Catan
+namespace Catan.Models
 {
     public class Game
     {
         public List<Player> Players { get; set; } = new List<Player>();
         public List<Development> Developments { get; set; } = new List<Development>();
-        public Settlement[] Settlements { get; set; }  = new Settlement[54];
+        public Settlement[] Settlements { get; set; } = new Settlement[54];
         public Street[] Streets { get; set; } = new Street[72];
         public Tile[] Tiles { get; set; } = new Tile[19];
         public Development developments { get; set; }
@@ -27,13 +27,13 @@ namespace Catan
         public Game(List<Player> players)
         {
             //LoadGame();
-            this.Players = players;
+            Players = players;
             //foreach(Player player in Players)
             //{
             //    Program.Dal.SavePlayer(player);
             //}
-            
-           
+
+
         }
 
         public void LoadGame()//werkt niet als het in de constructor wordt gebruikt
@@ -42,7 +42,7 @@ namespace Catan
             LoadStreets();
             CreateTiles();
             GetConnectingSettlementsToTiles();
-            
+
             LoadStreets();
         }
 
@@ -219,7 +219,7 @@ namespace Catan
                 }
             }
         }
-        
+
         public void LoadStreets()
         {
             for (int settlementNumber = 1; settlementNumber < 73; settlementNumber++)
@@ -444,9 +444,9 @@ namespace Catan
                         continue;
 
                 }
-            
+
             }
-            
+
         }
 
         public void CreateTiles()
@@ -467,7 +467,7 @@ namespace Catan
                 numbers.Insert(random.Next(0, numbers.Count), number);
             }
 
-            return numbers;                   
+            return numbers;
         }
 
         public void ShuffleTiles(Random random, List<int> numbers)
@@ -510,32 +510,32 @@ namespace Catan
             }
 
 
-            tiles.Insert(9, new Tile(10, "-", 0, true)); 
+            tiles.Insert(9, new Tile(10, "-", 0, true));
             Tile _tile = new Tile(10, "-", 0);
             tiles = _tile.AssignTileNames(tiles);
-            this.Tiles = tiles.ToArray();
+            Tiles = tiles.ToArray();
             UpdateTilesOfSettlements();
             GetConnectingSettlementsToTiles();
         }
 
         public void UpdateTilesOfSettlements()
         {
-            foreach(Settlement settlement in this.Settlements)
+            foreach (Settlement settlement in Settlements)
             {
-                for(int i = 0; i < settlement.TilesConnectedToThisSettlement.Count; i++)
+                for (int i = 0; i < settlement.TilesConnectedToThisSettlement.Count; i++)
                 {
-                    settlement.TilesConnectedToThisSettlement[i] = this.Tiles[GetTileIndex(settlement.TilesConnectedToThisSettlement[i])];
+                    settlement.TilesConnectedToThisSettlement[i] = Tiles[GetTileIndex(settlement.TilesConnectedToThisSettlement[i])];
                 }
             }
         }
         public void AssignConnectingPartsOfSettlement(int settlementNumber, string villagesNextToThisVillage, string streetsNextToThisVillage, string connectedTiles)
         {
-            this.Settlements[settlementNumber - 1] = new Settlement("D" + settlementNumber.ToString(), villagesNextToThisVillage, streetsNextToThisVillage, connectedTiles); 
+            Settlements[settlementNumber - 1] = new Settlement("D" + settlementNumber.ToString(), villagesNextToThisVillage, streetsNextToThisVillage, connectedTiles);
         }
         public void AssignConnectingPartsToStreet(int streetNumber, string streetsNextToThisStreet, string villagesTouchingStreet)
         {
             Street street = new Street("S" + streetNumber.ToString(), streetsNextToThisStreet, villagesTouchingStreet);
-            this.Streets[streetNumber -1] = street;
+            Streets[streetNumber - 1] = street;
         }
 
         public int GetSettlementIndex(string settlementLocation)
@@ -563,7 +563,7 @@ namespace Catan
                 }
             }
             return int.Parse(tileNumber);
-            
+
         }
         public int GetTileIndex(Tile tile)
         {
@@ -571,7 +571,7 @@ namespace Catan
         }
         public void GetConnectingSettlementsToTiles()
         {
-            for(int i = 0; i < 19; i++)
+            for (int i = 0; i < 19; i++)
             {
                 switch (i)
                 {
@@ -606,7 +606,7 @@ namespace Catan
                         AssignConnectingSettlementsToTile(i, "D21, D22, D23, D32, D33, D34");
                         continue;
                     case 10:
-                       AssignConnectingSettlementsToTile(i, "D23, D24, D25, D34, D35, D36");
+                        AssignConnectingSettlementsToTile(i, "D23, D24, D25, D34, D35, D36");
                         continue;
                     case 11:
                         AssignConnectingSettlementsToTile(i, "D25, D26, D27, D36, D37, D38");
@@ -641,12 +641,12 @@ namespace Catan
             string[] connectedSettlements = connectingSettlements.Replace(" ", "").Split(",");
             Settlement[] settlements = new Settlement[6];
 
-            for(int i = 0; i < 6; i++)
+            for (int i = 0; i < 6; i++)
             {
                 string connectedSettlement = connectedSettlements[i];
                 //Settlement thisSettlement = Program.game.Settlements[GetSettlementIndex(connectedSettlement)];
-                this.Tiles[TileIndex].ConnectedSettlements[i] = this.Settlements[GetSettlementIndex(connectedSettlement)];
-            }   
+                Tiles[TileIndex].ConnectedSettlements[i] = Settlements[GetSettlementIndex(connectedSettlement)];
+            }
 
         }
         public int GetStreetIndex(Street street)
@@ -665,7 +665,7 @@ namespace Catan
 
         public Settlement[] GetSettlements()
         {
-            Settlement[] settlements = this.Settlements;
+            Settlement[] settlements = Settlements;
             return settlements;
         }
         public void ShowMessage(string message, string messageEndTurn, Button woodAmount, Button stoneAmount, Button grainAmount, Button sheepAmount, Button oreAmount, Button knightAmount, Button yearOfPlentyAmount, Button monopolyAmount, Button victoryPointAmount, Button playerName, Button endTurn, Button dice)
@@ -701,10 +701,10 @@ namespace Catan
             playerName.Text = player.UserName + "\n" + player.Points;
 
         }
-       
+
         public bool EndGame()
         {
-            if(Program.game.Players[0].Points > 9)
+            if (Program.game.Players[0].Points > 9)
             {
                 return true;
             }
@@ -712,5 +712,5 @@ namespace Catan
         }
 
     }
-    
+
 }

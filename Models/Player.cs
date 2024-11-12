@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Catan
+namespace Catan.Models
 {
     public class Player
     {
@@ -24,30 +24,30 @@ namespace Catan
 
         public Player(string userName, string playerColour)
         {
-            this.UserName = userName;
-            this.PlayerColour = playerColour;
+            UserName = userName;
+            PlayerColour = playerColour;
         }
         public Player(string userName)
         {
-            this.UserName = userName;
+            UserName = userName;
         }
-       
+
         public Player()
         {
 
         }
         public Player(int id, int points, string userName, int numberOfStreets, int numberOfVillages, int numberOfCities, string playerColour, int firstSettlement, int firstStreets)
         {
-            this.Id = id;
-            this.Points = points;
-            this.UserName=userName;
-            this.NumberOfStreets = numberOfStreets;
-            this.NumberOfVillages = numberOfVillages;
-            this.NumberOfCities = numberOfCities;
-            this.PlayerColour = playerColour;
-            this.FirstSettlement = firstSettlement;
-            this.FirstStreets = firstStreets;
+            Id = id;
+            Points = points;
+            UserName = userName;
+            NumberOfStreets = numberOfStreets;
+            NumberOfVillages = numberOfVillages;
+            NumberOfCities = numberOfCities;
+            PlayerColour = playerColour;
+            FirstSettlement = firstSettlement;
+            FirstStreets = firstStreets;
         }
-        
+
     }
 }
