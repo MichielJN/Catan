@@ -9,8 +9,8 @@ namespace Catan.Models
     public class Rescources
     {
         public int Grain { get; set; } = 0;
-        public int Stone { get; set; } = 0;
-        public int Wood { get; set; } = 0;
+        public int Stone { get; set; } = 20;
+        public int Wood { get; set; } = 20;
         public int Ore { get; set; } = 0;
         public int Sheep { get; set; } = 0;
 

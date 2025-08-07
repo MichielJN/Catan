@@ -868,7 +868,8 @@ namespace Catan
 
                         }
                     }
-                
+                Street _street = Program.game.Streets[streetNumber - 1];
+                 AmountOfStreets.Text = street.CountStreets(Program.game.Streets.ToList(), street, new List<string>(), 0, new List<(string, int, List<string>)>(), false).ToString();
 
 
             }

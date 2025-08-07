@@ -56,5 +56,76 @@ namespace Catan.Models
             }
         }
 
+        public int CountStreets(List<Street> allStreets, Street street, List<string> visitedStreets, int streetCount, List<(string, int, List<string>)> streetsToRevisit, bool isRevisitedStreet)
+        {
+            if (street.Owner.UserName == "-" & streetCount == 0)
+            {
+                return 0;
+            }
+            List<string> _visitedStreets = new List<string>(visitedStreets);
+            _visitedStreets.Add(street.Location);
+            List<(string, int, List<string>)> _streetsToRevisit = new List<(string, int, List<string>)>(streetsToRevisit);
+            int _streetCount = streetCount + 1;
+
+            if (isRevisitedStreet)
+            {
+                _streetsToRevisit.RemoveAt(0);
+            }
+
+            int amountOfStreetsNextToThisStreet = 0;
+            List<Street> ownedNearbyStreets = new List<Street>();
+
+            foreach (Street _street in street.StreetsNextToThisStreet)
+            {
+                if (_street.Owner.UserName == street.Owner.UserName)
+                {
+                    amountOfStreetsNextToThisStreet++;
+                    ownedNearbyStreets.Add(_street);
+                }
+            }
+
+            if (ownedNearbyStreets.Count == 0)
+            {
+                return _streetCount;
+            }
+            else if (ownedNearbyStreets.Count == 1)
+            {
+                if (visitedStreets.Contains(ownedNearbyStreets[0].Location))
+                {
+                    if (_streetsToRevisit.Count == 0)
+                    {
+                        return _streetCount;
+                    }
+                    else
+                    {
+                        Street nextStreet = allStreets.FirstOrDefault(x => x.Location == _streetsToRevisit[0].Item1);
+                        return CountStreets(allStreets, nextStreet, _streetsToRevisit[0].Item3, _streetsToRevisit[0].Item2, _streetsToRevisit, true);
+                    }
+                }
+                else
+                {
+                    return CountStreets(allStreets, ownedNearbyStreets[0], _visitedStreets, _streetCount, _streetsToRevisit, false);
+                }
+            }
+            else if (ownedNearbyStreets.Count > 1)
+            {
+
+                Street nextStreet = ownedNearbyStreets[0];
+                ownedNearbyStreets.RemoveAt(0);
+
+                List<(string, int, List<string>)> addToStreetsToRevisit = new List<(string, int, List<string>)>();
+
+                foreach (Street _street in ownedNearbyStreets)
+                {
+                    addToStreetsToRevisit.Add((_street.Location, _streetCount, _visitedStreets));
+                    _visitedStreets.Add(_street.Location);
+                }
+                _streetsToRevisit.AddRange(addToStreetsToRevisit);
+                return CountStreets(allStreets, nextStreet, _visitedStreets, _streetCount, _streetsToRevisit, false);
+            }
+
+            return _streetCount;
+
+        }
     }
 }
